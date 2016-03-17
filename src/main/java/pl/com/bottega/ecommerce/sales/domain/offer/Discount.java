@@ -5,10 +5,26 @@ import java.math.BigDecimal;
 public class Discount {
 	public String discountCause;
 	public BigDecimal discount;
+	private String currency;
 	
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public Discount(){
 	}
 	
+	public Discount(String discountCause, BigDecimal discount, String currency) {
+		super();
+		this.discountCause = discountCause;
+		this.discount = discount;
+		this.currency = currency;
+	}
+
 	public String getDiscountCause() {
 		return discountCause;
 	}
