@@ -20,14 +20,14 @@ import java.math.BigDecimal;
 public class OfferItem {
 
 	//product
-	private Product product;
+	Product product;
 
-	private int quantity;
+	int quantity;
 
-	private Money money;
+	Money money;
 
 	//discount
-	private Discount discount;
+	Discount discount;
 
 	public OfferItem(Product product, int quantity) {
 		this(product, quantity, null);
@@ -85,24 +85,13 @@ public class OfferItem {
 	 * @return
 	 */
 	public boolean sameAs(OfferItem other, double delta) {
-		if (product.getProductName() == null) {
-			if (other.getProduct().getProductName() != null)
+		
+		if (product!=null) {
+			if (!product.equals(other.getProduct())){
 				return false;
-		} else if (!product.getProductName().equals(other.getProduct().getProductName()))
-			return false;
-		if (product.getProductPrice() == null) {
-			if (other.getProduct().getProductPrice() != null)
-				return false;
-		} else if (!product.getProductPrice().equals(other.getProduct().getProductPrice()))
-			return false;
-		if (product.getProductId() == null) {
-			if (other.getProduct().getProductId() != null)
-				return false;
-		} else if (!product.getProductId().equals(other.getProduct().getProductId()))
-			return false;
-		if (product.getProductType() != other.getProduct().getProductType())
-			return false;
-
+			}
+		}
+		
 		if (quantity != other.quantity)
 			return false;
 
@@ -134,38 +123,12 @@ public class OfferItem {
 		return result;
 	}
 
+	/**
+	 * @deprecated Use {@link pl.com.bottega.ecommerce.sales.domain.offer.Product#equals(pl.com.bottega.ecommerce.sales.domain.offer.OfferItem,Object)} instead
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OfferItem other = (OfferItem) obj;
-		if (money.getCurrency() == null) {
-			if (other.money.getCurrency() != null)
-				return false;
-		} else if (!money.getCurrency().equals(other.money.getCurrency()))
-			return false;
-		if (discount == null) {
-			if (other.discount != null)
-				return false;
-		} else if (!discount.equals(other.discount))
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (quantity != other.quantity)
-			return false;
-		if (money.getTotalCost() == null) {
-			if (other.money.getTotalCost() != null)
-				return false;
-		} else if (!money.getTotalCost().equals(other.money.getTotalCost()))
-			return false;
-		return true;
+		return product.equals(this, obj);
 	}
 
 	public Product getProduct() {

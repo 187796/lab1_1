@@ -54,4 +54,37 @@ public class Product {
 		public void setProductType(String productType) {
 			this.productType = productType;
 		}
+
+		public boolean equals(OfferItem offerItem, Object obj) {
+			if (offerItem == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (offerItem.getClass() != obj.getClass())
+				return false;
+			OfferItem other = (OfferItem) obj;
+			if (offerItem.money.getCurrency() == null) {
+				if (other.money.getCurrency() != null)
+					return false;
+			} else if (!offerItem.money.getCurrency().equals(other.money.getCurrency()))
+				return false;
+			if (offerItem.discount == null) {
+				if (other.discount != null)
+					return false;
+			} else if (!offerItem.discount.equals(other.discount))
+				return false;
+			if (this == null) {
+				if (other.product != null)
+					return false;
+			} else if (!equals(other.product))
+				return false;
+			if (offerItem.quantity != other.quantity)
+				return false;
+			if (offerItem.money.getTotalCost() == null) {
+				if (other.money.getTotalCost() != null)
+					return false;
+			} else if (!offerItem.money.getTotalCost().equals(other.money.getTotalCost()))
+				return false;
+			return true;
+		}
 }
